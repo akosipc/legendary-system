@@ -9,14 +9,18 @@ import {
   GridItem
 } from '@chakra-ui/react'
 
+import { NavLink } from '@components/NavLink'
+
 type LayoutProps = {
   children?: JSX.Element
   hasSession: boolean
+  currentPath: string
 }
 
 export const Layout = ({ 
   children,
-  hasSession
+  hasSession,
+  currentPath
 }: LayoutProps) => {
   return (
     <Grid
@@ -54,6 +58,16 @@ export const Layout = ({
         boxShadow='lg'
         area={'nav'}
       >
+        <NavLink 
+          href='/'
+          label='Products'
+          active={ currentPath === '/' || currentPath === '/products/new' }
+        />
+        <NavLink 
+          href='/reports'
+          label='Reports'
+          active={ currentPath === '/reports' }
+        />
       </GridItem>
       <GridItem 
         bg='gray.200'
