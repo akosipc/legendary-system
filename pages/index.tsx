@@ -69,4 +69,10 @@ const Home: NextPage = () => {
   )
 }
 
+export const getServerSideProps = async (context) => {
+  return {
+    props: {}
+  }
+}
+
 export default Home
