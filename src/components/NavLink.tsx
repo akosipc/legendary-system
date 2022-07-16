@@ -26,16 +26,18 @@ export const NavLink = ({
   return (
     <NextLink href={ href } passHref>
       <Box
-        bg={ active ? 'teal.300': 'gray.100' }
+        bg={ active ? 'teal.500': 'gray.100' }
         color={ active ? 'white' : 'gray.700' }
 
         padding={4}
         fontWeight='600'
+        transition='all 0.3s ease'
         _hover={{
-          bg: 'teal.300',
+          bg: 'teal.600',
           color: 'white',
           cursor: 'pointer',
         }}
+
       >
         <Flex
           alignItems='center'

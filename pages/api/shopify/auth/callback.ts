@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-
 import type { AuthQuery } from '@shopify/shopify-api'
+
+import { setCookies } from 'cookies-next'
 
 import Shopify from '@lib/shopify'
 
@@ -10,8 +11,9 @@ const handler = async(
 ) => {
   try {
     const session = await Shopify.Auth.validateAuthCallback(req, res, req.query as AuthQuery);
-    req.currentStore = session.scope;
-    req.accessToken = session.accessToken
+
+    setCookies('currentStore', session.scope, { req, res })
+    setCookies('accessToken', session.accessToken, { req, res })
 
     console.log(session.accessToken);
     // all good, redirect to '/'
