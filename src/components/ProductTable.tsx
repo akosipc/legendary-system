@@ -72,9 +72,6 @@ export const ProductTable = ({
                           Edit
                         </Button>
                       </NextLink>
-                      <Button size='sm' colorScheme='red'>
-                        Archive
-                      </Button>
                     </Flex>
                   </Td>
                 </Tr>
