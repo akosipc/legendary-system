@@ -1,5 +1,4 @@
 import type { NextPage } from 'next'
-import Head from 'next/head'
 import { useRouter } from 'next/router'
 
 import { useState, useEffect } from 'react'
@@ -7,12 +6,13 @@ import { getCookie } from 'cookies-next'
 
 import { Meta } from '@layouts/Meta'
 import { Layout } from '@layouts/Layout'
+import { ModalBundle } from '@components/ModalBundle'
 import { ProductTable } from '@components/ProductTable'
 
 import {
   Box,
   SkeletonText,
-  SkeletonCircle
+  SkeletonCircle,
 } from '@chakra-ui/react'
 
 const Home: NextPage = () => {
@@ -63,6 +63,12 @@ const Home: NextPage = () => {
               products={ products }
             />
         }
+        <ModalBundle
+          title='Test Modal'
+          isOpen={!!router.query.productId}
+          onClose={ () => router.push('/') }
+        >
+        </ModalBundle>
       </Layout>
     </>
   )

@@ -18,6 +18,7 @@ const handler = async(
           node {
             id
             title
+            legacyResourceId
             variants(first: 3) {
               edges {
                 node {

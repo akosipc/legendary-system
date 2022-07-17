@@ -70,7 +70,7 @@ export const Layout = ({
         <NavLink 
           href='/'
           label='Products'
-          active={ currentPath === '/' || currentPath === '/products/new' }
+          active={ currentPath === '/' || currentPath.includes('products') }
         />
         <NavLink 
           href='/reports'

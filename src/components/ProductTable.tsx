@@ -1,4 +1,5 @@
 import React from 'react'
+import NextLink from 'next/link'
 
 import {
   Text,
@@ -53,9 +54,17 @@ export const ProductTable = ({
                     alignItems='center'
                     justifyContent='space-between'
                   >
-                    <Button size='sm' colorScheme='blue'>
-                      Edit
-                    </Button>
+                    <NextLink
+                      as={`/products/${product.node.legacyResourceId}/edit`}
+                      href={`/?productId=${product.node.legacyResourceId}`}
+                    >
+                      <Button 
+                        size='sm' 
+                        colorScheme='blue'
+                      >
+                        Edit
+                      </Button>
+                    </NextLink>
                     <Button size='sm' colorScheme='red'>
                       Archive
                     </Button>
