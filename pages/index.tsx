@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
 import { getCookie } from 'cookies-next'
 
+import { Meta } from '@layouts/Meta'
 import { Layout } from '@layouts/Layout'
 import { ProductTable } from '@components/ProductTable'
 
@@ -35,28 +36,35 @@ const Home: NextPage = () => {
         .then(response => response.json())
 
       setProducts(products?.products?.edges)
-      setLoading(false)
     }
 
-    fetchProducts()
-  }, [])
+    if (accessToken !== undefined) {
+      fetchProducts()
+      setLoading(false)
+    }
+  }, [accessToken])
 
   return (
-    <Layout
-      hasSession={ accessToken !== undefined }
-      currentPath={ router.pathname }
-    >
-      {
-        isLoading ?
-          <Box padding='6' boxShadow='lg' bg='white'>
-            <SkeletonCircle size='10' />
-            <SkeletonText mt='4' noOfLines={20} spacing='4' />
-          </Box> :
-          <ProductTable
-            products={ products }
-          />
-      }
-    </Layout>
+    <>
+      <Meta
+        title='Products List | Shopify CRUD Store'
+      />
+      <Layout
+        hasSession={ accessToken !== undefined }
+        currentPath={ router.pathname }
+      >
+        {
+          isLoading ?
+            <Box padding='6' boxShadow='lg' bg='white'>
+              <SkeletonCircle size='10' />
+              <SkeletonText mt='4' noOfLines={20} spacing='4' />
+            </Box> :
+            <ProductTable
+              products={ products }
+            />
+        }
+      </Layout>
+    </>
   )
 }
 

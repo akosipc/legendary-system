@@ -13,7 +13,7 @@ const handler = async(
 
   const products = await client.query({
     data: `{
-      products (first: 20) {
+      products (first: 20, reverse: true) {
         edges {
           node {
             id

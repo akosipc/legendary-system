@@ -47,7 +47,13 @@ export const Layout = ({
         
         <Box>
           {
-            hasSession ? "" :
+            hasSession ? 
+              <NextLink href='/api/shopify/logout' passHref>
+                <Button colorScheme='red'>
+                  Sign Out
+                </Button>
+              </NextLink>
+              :
               <NextLink href='/api/shopify/login' passHref>
                 <Button colorScheme='teal'>
                   Sync via Shopify
