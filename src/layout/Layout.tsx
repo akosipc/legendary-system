@@ -10,6 +10,10 @@ import {
   GridItem
 } from '@chakra-ui/react'
 
+import {
+  AddIcon
+} from '@chakra-ui/icons'
+
 import { NavLink } from '@components/NavLink'
 
 type LayoutProps = {
@@ -48,11 +52,24 @@ export const Layout = ({
         <Box>
           {
             hasSession ? 
-              <NextLink href='/api/shopify/logout' passHref>
-                <Button colorScheme='red'>
-                  Sign Out
-                </Button>
-              </NextLink>
+              <>
+                <NextLink
+                  as={`/products/new`}
+                  href={`/?newProduct=true`}
+                >
+                  <Button colorScheme='teal'
+                    mr={ 4 }
+                  >
+                    <AddIcon mr={2} />
+                    Create Product
+                  </Button>
+                </NextLink>
+                <NextLink href='/api/shopify/logout' passHref>
+                  <Button colorScheme='red'>
+                    Sign Out
+                  </Button>
+                </NextLink>
+              </>
               :
               <NextLink href='/api/shopify/login' passHref>
                 <Button colorScheme='teal'>

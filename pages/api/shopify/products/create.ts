@@ -9,11 +9,11 @@ const handler = async(
   const session = await Shopify.Utils.loadCurrentSession(req, res)
   const client = new Shopify.Clients.Graphql(session.shop, session.accessToken)
 
+
   const product = await client.query({
     data: `
       mutation {
-        prod: productUpdate(input: {
-          id: "gid://shopify/Product/${req.body.id}",
+        prod: productCreate(input: {
           title: "${req.body.title}",
           descriptionHtml: "${req.body.description}",
         }) {
@@ -22,6 +22,18 @@ const handler = async(
             title
             description
             legacyResourceId
+            variants(first: 3) {
+              edges {
+                node {
+                  id
+                  price
+                  image {
+                    id
+                    url
+                  }
+                }
+              }
+            }
           }
           userErrors {
             field

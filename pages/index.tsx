@@ -70,6 +70,20 @@ const Home: NextPage = () => {
     router.push('/')
   }
 
+  const handleCreate = async (data) => {
+    const newProduct = await fetch(`/api/shopify/products/create`, {
+      body: JSON.stringify(data),
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then(response => response.json())
+
+    setProducts([{node: newProduct}, ...products])
+
+    router.push('/')
+  }
+
   const findProduct = (id) => {
     return products.find((product) => {
       return product.node.legacyResourceId === id
@@ -108,6 +122,21 @@ const Home: NextPage = () => {
               />
               : ''
           }
+
+        </ModalBundle>
+        <ModalBundle
+          title='Adding Product'
+          isOpen={!!router.query.newProduct}
+          onClose={() => router.push('/')}
+        >
+          {
+            router.query.newProduct ?
+              <ProductForm
+                onSubmit={ handleCreate }
+              />
+              : ''
+          }
+
         </ModalBundle>
       </Layout>
     </>
