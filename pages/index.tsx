@@ -12,6 +12,7 @@ import { ProductTable } from '@components/ProductTable'
 
 import {
   Box,
+  Text,
   SkeletonText,
   SkeletonCircle,
 } from '@chakra-ui/react'
@@ -45,6 +46,36 @@ const Home: NextPage = () => {
     }
   }, [accessToken])
 
+  const handleUpdate = async (data) => {
+    let newData = { ...data, id: router.query.productId }
+
+    const newProduct = await fetch(`/api/shopify/products/update`, {
+      body: JSON.stringify(newData),
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then(response => response.json())
+
+    setProducts(
+      products.map((product) => {
+        if (product.node.legacyResourceId === router.query.productId) {
+          return { ...product, node: { ...product.node, ...newProduct } }
+        } else {
+          return product
+        }
+      })
+    )
+
+    router.push('/')
+  }
+
+  const findProduct = (id) => {
+    return products.find((product) => {
+      return product.node.legacyResourceId === id
+    })
+  }
+
   return (
     <>
       <Meta
@@ -65,11 +96,18 @@ const Home: NextPage = () => {
             />
         }
         <ModalBundle
-          title='Test Modal'
+          title='Editing Product'
           isOpen={!!router.query.productId}
-          onClose={ () => router.push('/') }
+          onClose={() => router.push('/')}
         >
-          <ProductForm/>           
+          {
+            router.query.productId ?
+              <ProductForm
+                product={ findProduct(router.query.productId).node }
+                onSubmit={ handleUpdate }
+              />
+              : ''
+          }
         </ModalBundle>
       </Layout>
     </>

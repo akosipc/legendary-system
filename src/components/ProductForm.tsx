@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
@@ -25,15 +25,14 @@ export const ProductForm = ({
   onSubmit
 }) => {
   const { register, handleSubmit, setValue, formState: { errors, isSubmitting } } = useForm({ resolver: zodResolver(schema) })
-  const onSubmit = data => console.log(data)
 
   useEffect(() => {
-    if (product !== null) {
+    if (product !== null && product !== undefined) {
       Object.keys(product).map((key) => {
         setValue(key, product[key])
       })
     }
-  }, [])
+  }, [product])
 
   return (
     <Box

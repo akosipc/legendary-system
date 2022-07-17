@@ -11,8 +11,6 @@ const handler = async(
   const session = await Shopify.Utils.loadCurrentSession(req, res)
   const client = new Shopify.Clients.Graphql(session.shop, session.accessToken)
 
-  console.log(req.query)
-
   if (req.query.id) {
     const product = await client.query({
       data: `{
@@ -32,6 +30,7 @@ const handler = async(
             node {
               id
               title
+              description
               legacyResourceId
               variants(first: 3) {
                 edges {

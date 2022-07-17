@@ -44,6 +44,20 @@ const EditProduct: NextPage = ({
     }
   }, [accessToken])
 
+  const handleSubmit = async (data) => {
+    let newData = { ...data, id: legacyResourceId }
+
+    const response = await fetch(`/api/shopify/products/update`, {
+      body: JSON.stringify(newData),
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then(response => response.json())
+
+    router.push('/')
+  }
+
   return (
     <>
       <Meta
@@ -60,6 +74,7 @@ const EditProduct: NextPage = ({
             </Box> :
             <ProductForm
               product={ product }
+              onSubmit={ handleSubmit }
             />
         }
       </Layout>
