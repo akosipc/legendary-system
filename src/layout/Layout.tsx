@@ -89,11 +89,6 @@ export const Layout = ({
           label='Products'
           active={ currentPath === '/' || currentPath.includes('products') }
         />
-        <NavLink 
-          href='/reports'
-          label='Reports'
-          active={ currentPath === '/reports' }
-        />
       </GridItem>
       <GridItem 
         bg='gray.200'
