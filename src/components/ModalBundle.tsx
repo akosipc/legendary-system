@@ -28,8 +28,8 @@ export const ModalBundle = ({
       onClose={ onClose }
     >
       <ModalOverlay/>
-      <ModalContent>
-        <ModalHeader> Test Modal </ModalHeader>
+        <ModalContent maxWidth='2xl'>
+        <ModalHeader> { title } </ModalHeader>
         <ModalCloseButton/>
         <ModalBody>
           { children }

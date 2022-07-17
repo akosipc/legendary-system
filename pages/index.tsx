@@ -7,6 +7,7 @@ import { getCookie } from 'cookies-next'
 import { Meta } from '@layouts/Meta'
 import { Layout } from '@layouts/Layout'
 import { ModalBundle } from '@components/ModalBundle'
+import { ProductForm } from '@components/ProductForm'
 import { ProductTable } from '@components/ProductTable'
 
 import {
@@ -68,6 +69,7 @@ const Home: NextPage = () => {
           isOpen={!!router.query.productId}
           onClose={ () => router.push('/') }
         >
+          <ProductForm/>           
         </ModalBundle>
       </Layout>
     </>
