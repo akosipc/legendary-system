@@ -7,22 +7,52 @@ import { getCookie } from 'cookies-next'
 
 import { Layout } from '@layouts/Layout'
 
+import {
+  Spinner
+} from '@chakra-ui/react'
+
 const Home: NextPage = () => {
   const router = useRouter()
+  const [accessToken, setAccessToken] = useState(undefined)
+  const [products, setProducts] = useState([])
+  //const [products, setProducts] = useState([])
 
-  const [accessToken, setAccessToken] = useState(getCookie('accessToken'))
+  //if (accessToken) {
+    //useEffect(async () => {
+      ////const products = await fetch(`/api/shopify/products/fetch`)
 
-  if (accessToken) {
-    useEffect(() => {
-      console.log('trigger')
-    }, [])
-  }
+      ////console.log(products) 
+
+    //}, [])
+  //}
+
+  useEffect(() => {
+    const fetchSession = async () => {
+      const sessionToken = await getCookie('accessToken')
+      setAccessToken(sessionToken)
+    }
+
+    fetchSession()
+  }, [])
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const products = await fetch(`/api/shopify/products/fetch`)
+        .then(response => response.json())
+
+      setProducts(products.products.edges)
+    }
+
+    fetchProducts()
+  }, [])
 
   return (
     <Layout
-      hasSession={ accessToken === null }
+      hasSession={ accessToken !== undefined }
       currentPath={ router.pathname }
-    />
+    >
+      { products.length }
+    </Layout>
   )
 }
 

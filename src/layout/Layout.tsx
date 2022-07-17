@@ -1,4 +1,5 @@
 import React from 'react'
+import NextLink from 'next/link'
 
 import {
   Box,
@@ -47,9 +48,11 @@ export const Layout = ({
         <Box>
           {
             hasSession ? "" :
-              <Button colorScheme='teal'>
-                Sync via Shopify
-              </Button>
+              <NextLink href='/api/shopify/login' passHref>
+                <Button colorScheme='teal'>
+                  Sync via Shopify
+                </Button>
+              </NextLink>
           }
         </Box>
       </GridItem>
