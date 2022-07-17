@@ -75,6 +75,7 @@ export const Layout = ({
       <GridItem 
         bg='gray.200'
         area={'main'}
+        padding={8}
       >
         { children }
       </GridItem>

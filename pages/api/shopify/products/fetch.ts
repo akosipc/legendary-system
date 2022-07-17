@@ -13,12 +13,23 @@ const handler = async(
 
   const products = await client.query({
     data: `{
-      products (first: 10) {
+      products (first: 20) {
         edges {
           node {
             id
             title
-            descriptionHtml
+            variants(first: 3) {
+              edges {
+                node {
+                  id
+                  price
+                  image {
+                    id
+                    url
+                  }
+                }
+              }
+            }
           }
         }
       }
