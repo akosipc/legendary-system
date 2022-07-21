@@ -13,12 +13,14 @@ import { ProductTable } from '@components/ProductTable'
 import {
   Box,
   Text,
+  useToast,
   SkeletonText,
   SkeletonCircle,
 } from '@chakra-ui/react'
 
 const Home: NextPage = () => {
   const router = useRouter()
+  const toast = useToast()
   const [accessToken, setAccessToken] = useState(undefined)
   const [products, setProducts] = useState([])
   const [isLoading, setLoading] = useState(true)
@@ -67,6 +69,14 @@ const Home: NextPage = () => {
       })
     )
 
+    toast({
+      title: `Successfully updated a Product`,
+      status: 'success',
+      position: 'top',
+      duration: 3000,
+      isCloseable: true
+    })
+
     router.push('/')
   }
 
@@ -80,6 +90,14 @@ const Home: NextPage = () => {
     }).then(response => response.json())
 
     setProducts([{node: newProduct}, ...products])
+
+    toast({
+      title: `Successfully created a Product`,
+      status: 'success',
+      position: 'top',
+      duration: 3000,
+      isCloseable: true
+    })
 
     router.push('/')
   }

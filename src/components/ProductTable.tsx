@@ -59,7 +59,7 @@ export const ProductTable = ({
                   <Td w={ 200 } isNumeric>
                     <Flex
                       alignItems='center'
-                      justifyContent='space-between'
+                      justifyContent='right'
                     >
                       <NextLink
                         as={`/products/${product.node.legacyResourceId}/edit`}
